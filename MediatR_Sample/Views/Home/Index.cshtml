@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Models.Models.Category>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .bt-cr {
+        width: 50%;
+        margin: 45px;
+        text-align: center;
+    }
+
+    .cat-container {
+        background: #eee;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding: 30px 10px 30px;
+        border: 1px solid #dbb685;
+        margin: 10px;
+    }
+
+        .cat-container > div {
+            margin-bottom: 20px;
+        }
+    .btn-outline-warning {
+        color: #645f51;
+        font-weight: bold;
+    }
+</style>
+
+<div class="bt-cr">
+    <a class="btn btn-success" asp-action="CreateCategory">Create New Category</a>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="cat-container">
+        <h4>@item.BookGenre :</h4>
+        <p>
+            @item.GenreDescription
+        </p>
+        <div>
+            <a href="/Home/Edit/@item.GenreId" class="btn btn-warning">ویرایش دسته اصلی</a>
+            <a href="/Home/Delete/@item.GenreId" class="btn btn-danger">حذف دسته اصلی</a>
+        </div>
+        <div>
+            <img src="/images/img/@item.ImageName" />
+            <a class="btn btn-outline-warning" asp-action="EditImage" asp-route-cateId="@item.GenreId">ویرایش تصویر</a>
+        </div>
+    </div>
+}
+

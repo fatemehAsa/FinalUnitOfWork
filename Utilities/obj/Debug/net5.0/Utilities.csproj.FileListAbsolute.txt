@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\MediatR\Utilities\bin\Debug\net5.0\Utilities.deps.json
+C:\Users\User\Desktop\MediatR\Utilities\bin\Debug\net5.0\Utilities.dll
+C:\Users\User\Desktop\MediatR\Utilities\bin\Debug\net5.0\ref\Utilities.dll
+C:\Users\User\Desktop\MediatR\Utilities\bin\Debug\net5.0\Utilities.pdb
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.AssemblyInfo.cs
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.dll
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\ref\Utilities.dll
+C:\Users\User\Desktop\MediatR\Utilities\obj\Debug\net5.0\Utilities.pdb

@@ -1,0 +1,134 @@
+﻿@model Models.Models.Category
+@{
+    ViewData["Title"] = "CreateCategory";
+}
+
+<style>
+    h3 {
+        text-align: left;
+        padding: 10px;
+        width: fit-content;
+    }
+
+    dt {
+        margin-bottom: 15px;
+    }
+
+        dt:first-child {
+            margin-top: 50px;
+        }
+
+    input[type="text"] {
+        padding: 10px 10px 10px 0;
+        text-align: right;
+    }
+
+    .btn-info {
+        width: 25%;
+        margin: 20px 10px 10px;
+    }
+
+    .img-con {
+        border: 1px dashed;
+        width: 200px;
+        height: 160px;
+        padding: 10px;
+        background: #fff;
+    }
+
+        .img-con > img {
+            max-width: 100%;
+            max-height: 100%;
+            width: 200px;
+            height: 160px;
+        }
+
+    .text-danger {
+        float: right;
+        height: 200px;
+        position: relative;
+        bottom: 100px;
+        font-weight: bold;
+        display: none;
+    }
+</style>
+<h3>ایجاد گروه جدید</h3>
+<div class="row">
+    <div class="col-md-8">
+        <dl>
+            <dt>Category Name :</dt>
+            <dd class="pr-d">
+                <input type="text" placeholder="نام گروه" id="category-name" class="form-control" />
+
+            </dd>
+            <dt>Category Description :</dt>
+            <dd>
+                <input type="text" placeholder="توضیحات" id="category-description" class="form-control" />
+            </dd>
+            <dt>Author Image:</dt>
+            <dd>
+                <input type="file" id="imgInp" class="form-control" />
+            </dd>
+        </dl>
+        <div class="img-con">
+            <img id="blah" src="/images/img/default.png" />
+        </div>
+        <a class="btn btn-info" onclick="Save()">ذخیره</a>
+
+        <div class="text-danger">
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+
+        function Save() {
+
+            var model = new FormData();
+            model.append("BookGenre", $("#category-name").val());
+            model.append("GenreDescription", $("#category-description").val());
+            model.append("ImageName", $("#imgInp")[0].files[0]);
+
+            $.ajax({
+                url: "/Home/CreateCategoryOnPost",
+                type: "Post",
+                data: model,
+                contentType: false,
+                dataType: "json",
+                processData: false,
+                success: function (res) {
+                    debugger
+                    if (res.error.errorId == -1) {
+                        var text = "--Category Name-- And --Category Description--  Are Required ! ";
+                        $('.text-danger').html(text);
+                        $('.text-danger').show();
+                    }
+                    else if (res.error.errorId == -2) {
+                        var text = "--Author Image-- Is Not Valid Image File ! ";
+                        $('.text-danger').html(text);
+                        $('.text-danger').show();
+                    }
+                    else if (res.error.errorId == -3) {
+                        var text = "--Author Image-- Is Required ! ";
+                        $('.text-danger').html(text);
+                        $('.text-danger').show();
+                    }
+                    else {
+                        $('.text-danger').hide();
+                        window.location.href = "/Home/Index";
+                    }
+                }
+
+            });
+        }
+    </script>
+}

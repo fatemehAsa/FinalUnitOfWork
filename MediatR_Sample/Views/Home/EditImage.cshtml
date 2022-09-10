@@ -1,0 +1,109 @@
+﻿@model Infrastructure.DTOs.PicCategoryViewModel
+@{
+    ViewData["Title"] = "EditImage";
+    var d = ViewData["HasAvatar"];
+    bool hasAvatar = (bool)d;
+}
+
+<style>
+    .col-md-8 {
+        padding-left: 60px;
+        top: 20px;
+        left: 40px;
+    }
+
+    select {
+        direction: rtl;
+    }
+</style>
+@if (hasAvatar)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditImage" id="frm-pic">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="AvatarName" />
+                <input type="hidden" asp-for="Angle" value="0" />
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Width" class="control-label"></label>
+                        <input type="number" class="form-control" asp-for="Width" min="50" />
+                        <span asp-validation-for="Width" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Height" class="control-label"></label>
+                        <input type="number" class="form-control" asp-for="Height" min="50" />
+                        <span asp-validation-for="Height" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" id="img-con">
+                        <img src="/images/img/@Model.AvatarName" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-warning" value="EditPictire" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <h3>تغییر زاویه تصویر</h3>
+            </div>
+            <select id="select-angle">
+                <option>--حالت اولیه--</option>
+                <option value="90">90 درجه ساعتگرد</option>
+                <option value="180">180 درجه ساعتگرد</option>
+                <option value="-90">90 درجه پاد ساعتگرد</option>
+
+
+            </select>
+        </div>
+    </div>
+
+
+}
+else
+{
+    <div class="text-danger text-right" dir="rtl">
+        <h3>
+            عکسی جهت ویرایش وجود ندارد !
+        </h3>
+        <a href="/Home/Index">بازگشت به صفحه اصلی</a>
+    </div>
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        if ($('#select-angle').change(function () {
+            debugger
+            var opt = $(this).val();
+            myNum = opt.replace(/\D/g, '');
+            if (myNum == '') {
+                $('#Angle').val(0);
+                $("#img-con img").css("transform", "rotate(0deg)");
+            }
+            else if (opt == 90) {
+
+                $("#img-con img").css("transform", "rotate(90deg)");
+                $('#Angle').val(opt);
+            }
+            else if (opt == 180) {
+                $("#img-con img").css("transform", "rotate(180deg)");
+                $('#Angle').val(opt);
+            }
+            else if (opt == -90) {
+                $("#img-con img").css("transform", "rotate(-90deg)");
+                $('#Angle').val(opt);
+            }
+            else {
+                $("#img-con img").css("transform", "rotate(0deg)");
+                $('#Angle').val(opt);
+            }
+        }));
+
+    </script>
+
+}
+
